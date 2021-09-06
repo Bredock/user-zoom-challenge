@@ -1,0 +1,47 @@
+.Details {
+  padding-top: 20px;
+}
+
+.card {
+  border: 1px solid #883cae;
+}
+
+.repo-image {
+  max-width: 150px;
+}
+
+.commit-image {
+  max-width: 125px;
+}
+
+.commit-element {
+  display: flex;
+  margin: 10px;
+}
+
+.commit-info {
+  text-align: start;
+  padding-bottom: 5px;
+  margin-left: 15px;
+  width: 100%;
+  border-bottom: 1px solid #883cae;
+}
+
+.org-info-wrapper {
+  text-align: start;
+  font-size: 1.4rem;
+}
+
+strong {
+  color: #883cae;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+@media (min-width: 992px) {
+  .repo-image {
+    max-width: 200px;
+  }  
+}
