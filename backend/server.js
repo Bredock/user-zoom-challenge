@@ -1,5 +1,6 @@
 const express = require('express');
 const connectDB = require('./config/db');
+const cors = require('cors');
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(
     extended: false,
   })
 );
+app.use(cors());
 
 // Define routes
 app.use('/api/repos', require('./routes/repo'));
