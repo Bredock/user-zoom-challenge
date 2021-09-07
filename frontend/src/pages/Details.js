@@ -7,10 +7,11 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 import CustomSpinner from '../components/CustomSpinner';
+import { trackRepo } from '../actions/repo-api';
 
 import './Details.css';
 
-const Details = ({ orgInfo, loading, commitList, selectedRepo }) => {
+const Details = ({ orgInfo, loading, commitList, selectedRepo, trackRepo }) => {
   let history = useHistory();
 
   if (!orgInfo || Object.keys(orgInfo).length === 0) {
@@ -25,9 +26,9 @@ const Details = ({ orgInfo, loading, commitList, selectedRepo }) => {
     }
   };
 
-  const trackRepo = () => {};
-
-  console.log('selected repo -> ', selectedRepo);
+  const onTrackRepo = () => {
+    trackRepo({ repo: selectedRepo, commits: commitList });
+  };
 
   const commitListElement =
     (commitList !== null &&
@@ -95,11 +96,18 @@ const Details = ({ orgInfo, loading, commitList, selectedRepo }) => {
               </div>
               <div className='info-footer'>
                 <div className='icons-wrapper'>
-                  <i className='pi pi-star footer-icon'></i> {selectedRepo.stars}
-                  <i className='pi pi-share-alt footer-icon'></i> {selectedRepo.forks}
-                  <i className='pi pi-bell footer-icon'></i> {selectedRepo.issues}
+                  <i className='pi pi-star footer-icon'></i>{' '}
+                  {selectedRepo.stars}
+                  <i className='pi pi-share-alt footer-icon'></i>{' '}
+                  {selectedRepo.forks}
+                  <i className='pi pi-bell footer-icon'></i>{' '}
+                  {selectedRepo.issues}
                 </div>
-                <Button variant='primary' id='track-button' onClick={trackRepo}>
+                <Button
+                  variant='primary'
+                  id='track-button'
+                  onClick={onTrackRepo}
+                >
                   Track Repo
                 </Button>
               </div>
@@ -117,8 +125,8 @@ Details.propTypes = {
   commitList: PropTypes.array,
   selectedRepo: PropTypes.object,
   loading: PropTypes.bool,
+  trackRepo: PropTypes.func.isRequired,
 };
-
 
 const mapStateToProps = (state) => ({
   orgInfo: state.githubApi.orgInfo,
@@ -127,4 +135,4 @@ const mapStateToProps = (state) => ({
   loading: state.githubApi.loading,
 });
 
-export default connect(mapStateToProps)(Details);
+export default connect(mapStateToProps, { trackRepo })(Details);
