@@ -120,6 +120,7 @@ List.propTypes = {
   getGithubRepoCommits: PropTypes.func.isRequired,
   orgInfo: PropTypes.object,
   repoList: PropTypes.array,
+  loading: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({

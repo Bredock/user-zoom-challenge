@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
+import PropTypes from 'prop-types';
 
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -55,7 +56,7 @@ const Details = ({ orgInfo, loading, commitList, selectedRepo }) => {
               </p>
               <p>
                 <strong>Email: </strong>{' '}
-                {(commit.commit && commit.commit.committer.email) || ''}
+                {(commit.commit && commit.commit.author.email) || ''}
               </p>
               <p>
                 <strong>Date: </strong>{' '}
@@ -110,6 +111,14 @@ const Details = ({ orgInfo, loading, commitList, selectedRepo }) => {
     </div>
   );
 };
+
+Details.propTypes = {
+  orgInfo: PropTypes.object,
+  commitList: PropTypes.array,
+  selectedRepo: PropTypes.object,
+  loading: PropTypes.bool,
+};
+
 
 const mapStateToProps = (state) => ({
   orgInfo: state.githubApi.orgInfo,
