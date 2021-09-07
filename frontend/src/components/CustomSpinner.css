@@ -1,0 +1,17 @@
+.spinner {
+  height: 93vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner-border {
+  border: .5em solid #883cae;
+  display: inline-block;
+    width: 10rem;
+    height: 10rem;
+    vertical-align: -.125em;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: .75s linear infinite spinner-border;
+}
