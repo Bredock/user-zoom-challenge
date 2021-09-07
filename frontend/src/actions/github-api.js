@@ -50,6 +50,7 @@ export const getGithubOrgRepos =
           description: repo.description,
           stars: repo.stargazers_count,
           issues: repo.open_issues,
+          id: repo.id
         };
       });
 
