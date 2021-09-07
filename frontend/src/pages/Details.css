@@ -29,7 +29,24 @@
 
 .org-info-wrapper {
   text-align: start;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
+}
+
+.icons-wrapper {
+  color: #883cae;
+  font-weight: 700;
+}
+
+.info-footer {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 25px;
+  align-items: center;
+}
+
+.footer-icon {
+  margin-left: 15px;
+  color: #883cae;
 }
 
 strong {
@@ -43,5 +60,5 @@ p {
 @media (min-width: 992px) {
   .repo-image {
     max-width: 200px;
-  }  
+  }
 }

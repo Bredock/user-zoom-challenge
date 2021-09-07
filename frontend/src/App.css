@@ -35,3 +35,13 @@ button.btn-primary:hover {
   background-color: #601e81;
   border-color: #601e81;
 }
+
+button.btn-primary:active {
+  background-color: #601e81;
+  border-color: #601e81;
+}
+
+button.btn-primary:focus {
+  background-color: #601e81;
+  border-color: #601e81;
+}

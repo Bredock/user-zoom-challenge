@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,15 +10,8 @@ import Alerts from './components/Alerts';
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
-import { setAlert } from './actions/alert';
 
 function App() {
-
-  useEffect(() => {
-    store.dispatch(setAlert('Testing alerts', 'warning'));
-    store.dispatch(setAlert('Testing alerts', 'danger'));
-    store.dispatch(setAlert('Testing alerts', 'success'));
-  }, []);
 
   return (
     <Provider store={store}>

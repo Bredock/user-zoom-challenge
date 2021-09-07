@@ -9,6 +9,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
 
+import CustomSpinner from '../components/CustomSpinner';
+
 import {
   getGithubOrg,
   getGithubOrgRepos,
@@ -18,12 +20,13 @@ import {
 const List = ({
   orgInfo,
   repoList,
+  loading,
   getGithubOrg,
   getGithubOrgRepos,
   getGithubRepoCommits,
 }) => {
   let history = useHistory();
-  const [value, setValue] = useState('');
+  const [organization, setOrganization] = useState('');
   const [selectedRepo, setSelectedRepo] = useState({});
 
   const [lazyParams, setLazyParams] = useState({
@@ -33,9 +36,10 @@ const List = ({
   });
 
   useEffect(() => {
-    value &&
+    orgInfo.name && setOrganization(orgInfo.name);
+    organization &&
       getGithubOrgRepos({
-        org: value,
+        org: organization,
         perPage: lazyParams.rows,
         page: lazyParams.page + 1,
       });
@@ -50,7 +54,7 @@ const List = ({
   };
 
   const searchRepos = () => {
-    getGithubOrg({ org: value });
+    getGithubOrg({ org: organization });
   };
 
   const updateAtTemplate = (rowData) => {
@@ -60,19 +64,21 @@ const List = ({
 
   const onSelectionChange = (selectedRepo) => {
     setSelectedRepo(selectedRepo);
-    getGithubRepoCommits({ org: value, repo: selectedRepo.name });
+    getGithubRepoCommits({ org: organization, repo: selectedRepo });
     history.push('/details');
   };
 
-  return (
+  return loading ? (
+    <CustomSpinner />
+  ) : (
     <div className='container'>
       <h1>List of Repositories</h1>
       <InputGroup className='mb-3'>
         <FormControl
           placeholder="Organization's name"
           aria-label="Organization's name"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          value={organization}
+          onChange={(e) => setOrganization(e.target.value)}
         />
         <Button variant='primary' id='search-button' onClick={searchRepos}>
           Search
@@ -114,11 +120,12 @@ List.propTypes = {
   getGithubRepoCommits: PropTypes.func.isRequired,
   orgInfo: PropTypes.object,
   repoList: PropTypes.array,
-}
+};
 
 const mapStateToProps = (state) => ({
   orgInfo: state.githubApi.orgInfo,
   repoList: state.githubApi.repoList,
+  loading: state.githubApi.loading,
 });
 
 export default connect(mapStateToProps, {
