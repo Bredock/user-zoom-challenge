@@ -1,13 +1,21 @@
 const express = require('express');
+const connectDB = require('./config/db');
 
 const app = express();
 
+// Connect to Database
+connectDB();
+
+// Init Middleware
 app.use(
   express.json({
     extended: false,
   })
 );
 
-app.get('/', (req, res) => res.send('Api Running'));
+// Define routes
+app.use('/api/repos', require('./routes/repo'));
 
-app.listen(5000, () => console.log('Listening on port 5000!'));
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log('Listening on port 5000!'));
