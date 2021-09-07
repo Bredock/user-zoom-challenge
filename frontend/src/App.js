@@ -21,7 +21,7 @@ function App() {
             <p>UserZoom Fullstack JS Challenge</p>
           </header> */}
           <Header />
-          <div className='container'>
+          <div className='container main-wrapper'>
             <Alerts />
             <Switch>
               <Route exact path='/' component={List} />
