@@ -11,7 +11,7 @@ import { trackRepo } from '../actions/repo-api';
 
 import './Details.css';
 
-const Details = ({ orgInfo, loading, commitList, selectedRepo, trackRepo }) => {
+const Details = ({ orgInfo, loading, loadingRepo, commitList, selectedRepo, trackRepo }) => {
   let history = useHistory();
 
   if (!orgInfo || Object.keys(orgInfo).length === 0) {
@@ -38,7 +38,7 @@ const Details = ({ orgInfo, loading, commitList, selectedRepo, trackRepo }) => {
           <div className='commit-element' key={commit.sha}>
             <div>
               <img
-                src={(commit.author && commit.author.avatar_url) || ''}
+                src={commit.author.avatar_url}
                 className='commit-image'
                 alt='commit'
               />
@@ -53,22 +53,22 @@ const Details = ({ orgInfo, loading, commitList, selectedRepo, trackRepo }) => {
               </p>
               <p>
                 <strong>Author: </strong>{' '}
-                {(commit.author && commit.author.login) || ''}
+                {commit.author.login}
               </p>
               <p>
                 <strong>Email: </strong>{' '}
-                {(commit.commit && commit.commit.author.email) || ''}
+                {commit.author.email}
               </p>
               <p>
                 <strong>Date: </strong>{' '}
-                {(commit.commit && commit.commit.committer.date) || ''}
+                {commit.commit.committer.date}
               </p>
             </div>
           </div>
         );
       })) ||
     '';
-  return loading ? (
+  return (loading || loadingRepo) ? (
     <CustomSpinner />
   ) : (
     <div className='Details'>
@@ -133,6 +133,7 @@ const mapStateToProps = (state) => ({
   commitList: state.githubApi.commitList,
   selectedRepo: state.githubApi.selectedRepo,
   loading: state.githubApi.loading,
+  loadingRepo: state.repoApi.loadingRepo,
 });
 
 export default connect(mapStateToProps, { trackRepo })(Details);

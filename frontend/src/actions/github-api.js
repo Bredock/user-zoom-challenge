@@ -50,7 +50,7 @@ export const getGithubOrgRepos =
           description: repo.description,
           stars: repo.stargazers_count,
           issues: repo.open_issues,
-          id: repo.id
+          id: repo.id,
         };
       });
 
@@ -78,11 +78,28 @@ export const getGithubRepoCommits =
         `${githubApiUrl}repos/${org}/${repo.name}/commits`
       );
 
+      const filteredRes = res.data.map((commit) => {
+        return {
+          sha: commit.sha,
+          author: {
+            avatar_url: (commit.author && commit.author.avatar_url) || '',
+            login: (commit.author && commit.author.login) || '',
+            email: (commit.commit && commit.commit.author.email) || '',
+          },
+          commit: {
+            message: commit.commit.message,
+            committer: {
+              date: (commit.commit && commit.commit.committer.date) || '',
+            },
+          },
+        };
+      });
+
       dispatch({
         type: GET_GITAPI_COMMIT_LIST_SUCCESS,
         payload: {
           repo: repo,
-          commits: res.data,
+          commits: filteredRes,
         },
       });
     } catch (error) {

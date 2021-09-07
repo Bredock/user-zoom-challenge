@@ -25,10 +25,10 @@ export const trackRepo =
         viewers: repo.watchers,
         stars: repo.stars,
         issues: repo.issues,
-        commitHistory: '',
+        commitHistory: JSON.stringify(commits),
       };
 
-      const res = await axios.post(`http://localhost:5000/api/repos`, body);
+      await axios.post(`http://localhost:5000/api/repos`, body);
 
       dispatch({
         type: POST_REPOAPI_TRACK_SUCCESS,
