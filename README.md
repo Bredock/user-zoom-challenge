@@ -14,6 +14,7 @@ PORT=5000
 MONGO_URI=mongodb+srv://user-123:user-123@devconnector.ncmsn.mongodb.net/userZoom?retryWrites=true&w=majority
 ```
 - Run the "npm run dev" script to launch both applications.
+- To run the backend tests run "npm run test" script.
 
 # Server
 

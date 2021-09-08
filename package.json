@@ -11,7 +11,8 @@
     "install:general": "npm install",
     "install:server": "cd backend && npm install",
     "install:client": "cd frontend && npm install",
-    "install:dev": "npm run install:general && npm run install:server && npm run install:client"
+    "install:dev": "npm run install:general && npm run install:server && npm run install:client",
+    "test": "cd backend && npx jest"
   },
   "repository": {
     "type": "git",
