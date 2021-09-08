@@ -8,9 +8,10 @@
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "install:server": "npm install",
+    "install:general": "npm install",
+    "install:server": "cd backend && npm install",
     "install:client": "cd frontend && npm install",
-    "install:dev": "npm run install:server && npm run install:client"
+    "install:dev": "npm run install:general && npm run install:server && npm run install:client"
   },
   "repository": {
     "type": "git",
@@ -26,12 +27,5 @@
   "devDependencies": {
     "concurrently": "^6.2.1",
     "nodemon": "^2.0.12"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "express-validator": "^6.12.1",
-    "mongoose": "^6.0.4"
   }
 }

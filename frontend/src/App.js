@@ -17,9 +17,6 @@ function App() {
     <Provider store={store}>
       <Router>
         <div className='App'>
-          {/* <header className='App-header'>
-            <p>UserZoom Fullstack JS Challenge</p>
-          </header> */}
           <Header />
           <div className='container main-wrapper'>
             <Alerts />
