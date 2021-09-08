@@ -14,9 +14,6 @@ export const trackRepo =
         type: POST_REPOAPI_TRACK_INIT,
       });
 
-      console.log('Repo info -> ', repo);
-      console.log('Commits -> ', commits);
-
       const body = {
         name: repo.name,
         repoIdentifier: repo.id,
@@ -35,11 +32,10 @@ export const trackRepo =
       });
       dispatch(setAlert('Repo tracked successfully', 'success'));
     } catch (error) {
-      console.log('Errors traking repo -> ', error.response.data);
       const errorMessages = error.response.data.errors;
       errorMessages &&
         errorMessages.length > 0 &&
-        errorMessages.map((err) => {
+        errorMessages.forEach((err) => {
           dispatch(setAlert(err.msg, 'danger'));
         });
       dispatch({

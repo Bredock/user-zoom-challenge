@@ -10,7 +10,7 @@ const initialState = {
 };
 
 function repoApiReducer(state = initialState, action) {
-  const { type, payload } = action;
+  const { type } = action;
 
   switch (type) {
     case POST_REPOAPI_TRACK_SUCCESS: {
